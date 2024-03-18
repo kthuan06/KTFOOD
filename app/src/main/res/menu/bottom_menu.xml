@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/homeFragment"
+        android:title="Home"
+        android:icon="@drawable/home_1_svgrepo_com"
+        android:menuCategory="secondary"/>
+
+    <item android:id="@+id/foodFragment"
+        android:title="Food"
+        android:icon="@drawable/food_svgrepo_com"
+        android:menuCategory="secondary"/>
+
+    <item android:id="@+id/drinksFragment"
+        android:title="Drinks"
+        android:icon="@drawable/drinks_svgrepo_com"
+        android:menuCategory="secondary"/>
+
+    <item android:id="@+id/favoriteFragment"
+        android:title="Favorite"
+        android:icon="@drawable/favorite_svgrepo_com"
+        android:menuCategory="secondary"/>
+
+    <item android:id="@+id/cartFragment"
+        android:title="Cart"
+        android:icon="@drawable/cart_shopping_svgrepo_com"
+        android:menuCategory="secondary"/>
+
+</menu>
