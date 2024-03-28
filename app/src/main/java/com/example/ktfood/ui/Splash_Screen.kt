@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.animation.AnimationUtils
 import com.example.ktfood.R
 import com.example.ktfood.databinding.ActivitySplashScreenBinding
@@ -19,7 +20,7 @@ class Splash_Screen : AppCompatActivity() {
 
         binding.mainLogo.startAnimation(AnimationUtils.loadAnimation(this, R.anim.out_anim))
 
-        Handler().postDelayed({
+        Handler(Looper.getMainLooper()).postDelayed({
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()

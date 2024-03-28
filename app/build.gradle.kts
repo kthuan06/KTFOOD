@@ -52,5 +52,8 @@ dependencies {
     //navigation
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    //image slide
+    implementation ("com.github.denzcoskun:ImageSlideshow:0.1.2")
+
 
 }
