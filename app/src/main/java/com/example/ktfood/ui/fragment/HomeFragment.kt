@@ -1,14 +1,20 @@
 package com.example.ktfood.ui.fragment
 
+import RecyclerViewAdapter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.findViewTreeViewModelStoreOwner
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.ktfood.R
+import com.example.ktfood.adapter.AffirmationAdapter
+import com.example.ktfood.adapter.News
 import com.example.ktfood.adapter.ViewPagerAdapter
+import com.example.ktfood.data.DataCate
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,13 +49,60 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val rootView = inflater.inflate(R.layout.fragment_home, container, false)
+
         val viewPager2: ViewPager2 = rootView.findViewById(R.id.View_Pager2)
         val images = listOf(R.drawable.banner1, R.drawable.banner2, R.drawable.banner3,
             R.drawable.banner4, R.drawable.banner5, R.drawable.banner6, R.drawable.banner7)
 
         viewPager2.adapter = ViewPagerAdapter(images)
+        //
+
+//        val recyclerView: RecyclerView = rootView.findViewById(R.id.RecyclerCate)
+//        val layoutManager = LinearLayoutManager(requireContext())
+//        recyclerView.layoutManager = layoutManager
+//
+//        // Chuẩn bị dữ liệu cho RecyclerView
+//        val imageIDs = listOf(
+//            R.drawable.item_cate,
+//            R.drawable.main_logo
+//        )
+//        val text1 = listOf(
+//            "1111",
+//            "2222"
+//        )
+//        val text2 = listOf(
+//            "1111",
+//            "2222"
+//        )
+//        val text3 = listOf(
+//            "1111",
+//            "2222"
+//        )
+//
+//        // Tạo danh sách tin tức
+//        val newsList = ArrayList<News>()
+//        for (i in imageIDs.indices) {
+//            newsList.add(News(imageIDs[i], text1[i], text2[i], text3[i]))
+//        }
+//
+//        // Khởi tạo Adapter và gán cho RecyclerView
+//        val adapter = RecyclerViewAdapter(newsList)
+//        recyclerView.adapter = adapter
+
+        val recyclerView: RecyclerView = rootView.findViewById(R.id.recyclerView)
+
+        // Thiết lập LayoutManager cho RecyclerView
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        // Tạo Adapter và thiết lập cho RecyclerView
+        val dataSource = DataCate()
+        val adapter = AffirmationAdapter(requireContext(), dataSource.loadAffirmations())
+        recyclerView.adapter = adapter
         return rootView
     }
+
+
+
 
     companion object {
         /**

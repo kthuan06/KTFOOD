@@ -76,17 +76,26 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="7dp"
         />
+    <!-- Trong layout của Fragment -->
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/RecyclerCate"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"-->
+
+<!--        app:layout_constraintTop_toBottomOf="@id/text2"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:layout_marginTop="7dp" />-->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RecyclerCate"
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        tools:listitem="@layout/item_category"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"
-        app:layout_constraintTop_toBottomOf="@id/text2"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="7dp"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text2" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
