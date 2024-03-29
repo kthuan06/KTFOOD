@@ -57,9 +57,10 @@ private lateinit var binding:FragmentHomeBinding
         imageSlider.setImageList(imageList, ScaleTypes.FIT)
 
 
-        val foodName = listOf("Bun Hue", "Pho Ha No", "Mi Quang")
-        val price = listOf("$5", "$7", "$12")
-        val imagesFood = listOf(R.drawable.item_cate, R.drawable.food_svgrepo_com, R.drawable.item_cate)
+        val foodName = listOf("Bun Hue", "Pho Ha No", "Mi Quang", "Bánh mì", "Bánh xèo", "Ram chiên")
+        val price = listOf("$2", "$3", "$1", "$2", "$3", "$1")
+        val imagesFood = listOf(R.drawable.item_cate, R.drawable.pho, R.drawable.miquang,
+            R.drawable.banhmi, R.drawable.banhxeo, R.drawable.ramchien)
         val adapter_Product = ProductAdapter(foodName, price, imagesFood)
         binding.productlist.layoutManager = LinearLayoutManager(requireContext())
         binding.productlist.adapter = adapter_Product
