@@ -27,7 +27,7 @@
         tools:layout="@layout/fragment_drinks" />
     <fragment
         android:id="@+id/foodFragment"
-        android:name="com.example.ktfood.ui.fragment.FoodFragment"
+        android:name="com.example.ktfood.ui.fragment.MenuFragment"
         android:label="fragment_food"
-        tools:layout="@layout/fragment_food" />
+        tools:layout="@layout/fragment_menu" />
 </navigation>

@@ -6,14 +6,14 @@
         android:menuCategory="secondary"/>
 
     <item android:id="@+id/foodFragment"
-        android:title="Food"
+        android:title="Menu"
         android:icon="@drawable/food_svgrepo_com"
         android:menuCategory="secondary"/>
 
-    <item android:id="@+id/drinksFragment"
-        android:title="Drinks"
-        android:icon="@drawable/drinks_svgrepo_com"
-        android:menuCategory="secondary"/>
+<!--    <item android:id="@+id/drinksFragment"-->
+<!--        android:title="Drinks"-->
+<!--        android:icon="@drawable/drinks_svgrepo_com"-->
+<!--        android:menuCategory="secondary"/>-->
 
     <item android:id="@+id/favoriteFragment"
         android:title="Favorite"
