@@ -16,18 +16,18 @@
         android:label="fragment_cart"
         tools:layout="@layout/fragment_cart" />
     <fragment
-        android:id="@+id/favoriteFragment"
-        android:name="com.example.ktfood.ui.fragment.FavoriteFragment"
-        android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" />
-    <fragment
-        android:id="@+id/drinksFragment"
-        android:name="com.example.ktfood.ui.fragment.DrinksFragment"
-        android:label="fragment_drinks"
-        tools:layout="@layout/fragment_drinks" />
-    <fragment
-        android:id="@+id/foodFragment"
+        android:id="@+id/menuFragment"
         android:name="com.example.ktfood.ui.fragment.MenuFragment"
-        android:label="fragment_food"
+        android:label="fragment_menu"
         tools:layout="@layout/fragment_menu" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.ktfood.ui.fragment.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.ktfood.ui.fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

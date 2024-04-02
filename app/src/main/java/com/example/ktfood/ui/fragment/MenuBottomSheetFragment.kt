@@ -22,7 +22,6 @@ class MenuBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-
         }
     }
 
@@ -30,7 +29,12 @@ class MenuBottomSheetFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = FragmentMenuBottomSheetBinding.inflate(inflater, container, false)
+
+        binding.backMenu.setOnClickListener {
+            dismiss()
+        }
         val foodName = listOf("Bun Dau Mam Tom", "Pho Ha No", "Mi Quang")
         val foodPrice = listOf("$2", "$3", "$1")
         val foodImages = listOf(R.drawable.item_cate, R.drawable.pho, R.drawable.miquang)

@@ -5,12 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ktfood.R
+import com.example.ktfood.adapter.MenuAdapter
+import com.example.ktfood.databinding.FragmentMenuBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -18,43 +18,90 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class MenuFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
+    private lateinit var binding:FragmentMenuBinding
+    private lateinit var adapterFood : MenuAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
         }
     }
+    private val foodName = listOf("Bun Dau Mam Tom", "Pho Ha No", "Mi Quang", "Bánh mì", "Bánh xèo", "Ram chiên")
+    val foodPrice = listOf("$2", "$3", "$1", "$2", "$3", "$1")
+    val foodImages = listOf(R.drawable.item_cate, R.drawable.pho, R.drawable.miquang, R.drawable.banhmi, R.drawable.banhxeo, R.drawable.ramchien)
+
+
+    private val filterMenuFoodName = mutableListOf<String>()
+    private val filterMenuFoodPrice = mutableListOf<String>()
+    private val filterMenuFoodImage = mutableListOf<Int>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu, container, false)
+        binding = FragmentMenuBinding.inflate(inflater, container, false)
+
+
+//        val drinksName = listOf("Bánh mì", "Bánh xèo", "Ram chiên")
+//        val drinksPrice = listOf("$2", "$3", "$1")
+//        val drinksImages = listOf(R.drawable.banhmi, R.drawable.banhxeo, R.drawable.ramchien)
+
+        adapterFood = MenuAdapter(filterMenuFoodName, filterMenuFoodPrice,filterMenuFoodImage)
+//        val adapterDrinks = MenuAdapter(ArrayList(drinksName), ArrayList(drinksPrice), ArrayList(drinksImages))
+
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.adapter = adapterFood
+
+//        binding.recyclerView2.layoutManager = LinearLayoutManager(requireContext())
+//        binding.recyclerView2.adapter = adapterDrinks
+        setupSearchView()
+        showAllMenu()
+        
+        return binding.root
+    }
+
+    private fun showAllMenu() {
+        filterMenuFoodName.clear()
+        filterMenuFoodPrice.clear()
+        filterMenuFoodImage.clear()
+
+        filterMenuFoodName.addAll(foodName)
+        filterMenuFoodPrice.addAll(foodPrice)
+        filterMenuFoodImage.addAll(foodImages)
+
+        adapterFood.notifyDataSetChanged()
+    }
+
+    private fun setupSearchView() {
+        binding.searchView2.setOnQueryTextListener(object  :SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String): Boolean {
+                filterMenuItems(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                filterMenuItems(newText)
+                return true
+            }
+        })
+    }
+
+    private fun filterMenuItems(query: String) {
+        filterMenuFoodName.clear()
+        filterMenuFoodPrice.clear()
+        filterMenuFoodImage.clear()
+
+        foodName.forEachIndexed{ index, fN ->
+            if(fN.contains(query, ignoreCase = true)){
+                filterMenuFoodName.add(fN)
+                filterMenuFoodPrice.add(foodPrice[index])
+                filterMenuFoodImage.add(foodImages[index])
+            }
+        }
+        adapterFood.notifyDataSetChanged()
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FoodFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MenuFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+
     }
 }

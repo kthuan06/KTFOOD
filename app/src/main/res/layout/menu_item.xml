@@ -39,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:text="Noodle Hue"
+                android:textSize="14sp"
                 android:textColor="@color/bg_text"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/imageMenuItem"
