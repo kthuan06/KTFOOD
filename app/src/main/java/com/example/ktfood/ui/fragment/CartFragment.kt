@@ -1,5 +1,8 @@
 package com.example.ktfood.ui.fragment
 
+import com.example.ktfood.ui.PayOutActivity // Đảm bảo đường dẫn package là chính xác
+
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -24,6 +27,12 @@ class CartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
        binding = FragmentCartBinding.inflate(inflater, container, false)
+        binding.proceed.setOnClickListener {
+            val intent = Intent(requireContext(), PayOutActivity::class.java)
+            startActivity(intent)
+        }
+
+
         return binding.root
     }
 
@@ -37,6 +46,9 @@ class CartFragment : Fragment() {
         val adapter_Cart = CartAdapter(ArrayList(foodName), java.util.ArrayList(price), ArrayList(imagesFood))
         binding.cartlist.layoutManager = LinearLayoutManager(requireContext())
         binding.cartlist.adapter = adapter_Cart
+
+
+
     }
     companion object {
 
