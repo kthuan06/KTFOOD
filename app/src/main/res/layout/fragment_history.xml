@@ -49,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:text="TextView"
+                android:textColor="@color/bg_text"
                 app:layout_constraintBottom_toTopOf="@+id/textView13"
                 app:layout_constraintStart_toEndOf="@+id/imageView4"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -59,9 +60,32 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:text="TextView"
+                android:textColor="@color/bg_text"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView4"
                 app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView4"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="36dp"
+                android:backgroundTint="@color/bg_text"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@drawable/greenbutton"
+                android:text="Received"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/cardView4"
+                app:layout_constraintStart_toStartOf="@+id/cardView4"
+                app:layout_constraintTop_toBottomOf="@+id/cardView4" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

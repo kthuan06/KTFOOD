@@ -46,7 +46,7 @@ class MenuFragment : Fragment() {
 //        val drinksPrice = listOf("$2", "$3", "$1")
 //        val drinksImages = listOf(R.drawable.banhmi, R.drawable.banhxeo, R.drawable.ramchien)
 
-        adapterFood = MenuAdapter(filterMenuFoodName, filterMenuFoodPrice,filterMenuFoodImage)
+//        adapterFood = MenuAdapter(filterMenuFoodName, filterMenuFoodPrice,filterMenuFoodImage, requireContext())
 //        val adapterDrinks = MenuAdapter(ArrayList(drinksName), ArrayList(drinksPrice), ArrayList(drinksImages))
 
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "270167634011",
+    "project_id": "ktfood-e4c9e",
+    "storage_bucket": "ktfood-e4c9e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:270167634011:android:61c1cfcf52f79773c60f7e",
+        "android_client_info": {
+          "package_name": "com.example.ktfood"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTvkc6vr8c_XuC4d9oacnrHa_LO7bSUCI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

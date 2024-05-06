@@ -13,14 +13,25 @@ import androidx.viewpager2.widget.ViewPager2
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.ktfood.R
+import com.example.ktfood.adapter.MenuAdapter
 import com.example.ktfood.adapter.ProductAdapter
 import com.example.ktfood.adapter.ViewPagerAdapter
 import com.example.ktfood.data.DataCate
 import com.example.ktfood.databinding.FragmentHomeBinding
+import com.example.ktfood.model.MenuItem
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 
 class HomeFragment : Fragment() {
 private lateinit var binding:FragmentHomeBinding
+
+private lateinit var dataBase : FirebaseDatabase
+private lateinit var menuItems : MutableList<MenuItem>
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +49,9 @@ private lateinit var binding:FragmentHomeBinding
             val bottomSheetDialog = MenuBottomSheetFragment()
             bottomSheetDialog.show(parentFragmentManager, "test")
         }
+
+        retriveMenuItem()
+
         return binding.root
 
 //        val viewPager2: ViewPager2 = rootView.findViewById(R.id.View_Pager2)
@@ -47,6 +61,43 @@ private lateinit var binding:FragmentHomeBinding
 
 
     }
+
+    private fun retriveMenuItem() {
+        dataBase = FirebaseDatabase.getInstance()
+        val FoodRe: DatabaseReference = dataBase.reference.child("menu")
+
+        menuItems = mutableListOf()
+
+        FoodRe.addListenerForSingleValueEvent(object : ValueEventListener{
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (foodss in snapshot.children){
+                    val menuItem = foodss.getValue(MenuItem::class.java)
+                    menuItem?.let {
+                        menuItems.add(it)
+                    }
+                }
+                randomItem()
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+
+    private fun randomItem() {
+        val index = menuItems.indices.toList().shuffled()
+        val numItemToShow = 6
+        val subsetMenuItems = index.take(numItemToShow).map { menuItems[it] }
+
+        setAdapter(subsetMenuItems)
+    }
+
+    private fun setAdapter(subsetMenuItems: List<MenuItem>) {
+        val adapter_Product = MenuAdapter(subsetMenuItems, requireContext())
+        binding.productlist.layoutManager = LinearLayoutManager(requireContext())
+        binding.productlist.adapter = adapter_Product
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,13 +114,8 @@ private lateinit var binding:FragmentHomeBinding
         imageSlider.setImageList(imageList, ScaleTypes.FIT)
 
 
-        val foodName = listOf("Bun Hue", "Pho Ha No", "Mi Quang", "Bánh mì", "Bánh xèo", "Ram chiên")
-        val price = listOf("$2", "$3", "$1", "$2", "$3", "$1")
-        val imagesFood = listOf(R.drawable.item_cate, R.drawable.pho, R.drawable.miquang,
-            R.drawable.banhmi, R.drawable.banhxeo, R.drawable.ramchien)
-        val adapter_Product = ProductAdapter(foodName, price, imagesFood)
-        binding.productlist.layoutManager = LinearLayoutManager(requireContext())
-        binding.productlist.adapter = adapter_Product
+
+
     }
 
 
