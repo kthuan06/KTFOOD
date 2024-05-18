@@ -58,12 +58,64 @@ class CartFragment : Fragment() {
 
 
         binding.proceed.setOnClickListener {
-            val intent = Intent(requireContext(), PayOutActivity::class.java)
-            startActivity(intent)
+            getOrderItemsDetails()
+
+
+
         }
 
 
         return binding.root
+    }
+
+    private fun getOrderItemsDetails() {
+        val orderIdReference: DatabaseReference= database.reference.child("user").child(userID).child("CartItem")
+
+        val foodName = mutableListOf<String>()
+        val foodPrice = mutableListOf<String>()
+        val foodImage = mutableListOf<String>()
+        val foodDescription = mutableListOf<String>()
+        val foodIngredient = mutableListOf<String>()
+        val foodQuantities = cartAdapter.getUpdateQuantities()
+
+        orderIdReference.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (foodSS in snapshot.children){
+                    val orderItem = foodSS.getValue(CartItem::class.java)
+
+                    orderItem?.foodName?.let { foodName.add(it) }
+                    orderItem?.foodPrice?.let { foodPrice.add(it) }
+                    orderItem?.foodImage?.let { foodImage.add(it) }
+                    orderItem?.foodDescription?.let { foodDescription.add(it) }
+                    orderItem?.foodIngredient?.let { foodIngredient.add(it) }
+                }
+                orderNow(foodName, foodPrice, foodImage, foodDescription, foodIngredient, foodQuantities)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(requireContext(), "Order failed", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+    }
+
+    private fun orderNow(foodName: MutableList<String>,
+                         foodPrice: MutableList<String>,
+                         foodImage: MutableList<String>,
+                         foodDescription: MutableList<String>,
+                         foodIngredient: MutableList<String>,
+                         foodQuantities: MutableList<Int>) {
+    if(isAdded && context!=null){
+        val intent = Intent(requireContext(), PayOutActivity::class.java)
+        intent.putExtra("FoodItemName" ,foodName as ArrayList<String>)
+        intent.putExtra("FoodItemPrice" ,foodPrice as ArrayList<String>)
+        intent.putExtra("FoodItemImage" ,foodImage as ArrayList<String>)
+        intent.putExtra("FoodItemDescription" ,foodDescription as ArrayList<String>)
+        intent.putExtra("FoodItemIngredient" ,foodIngredient as ArrayList<String>)
+        intent.putExtra("FoodItemQuantities" ,foodQuantities as ArrayList<Int>)
+        startActivity(intent)
+    }
+
     }
 
     private fun retrireveCartItems() {
@@ -95,9 +147,9 @@ class CartFragment : Fragment() {
             }
 
             private fun setAdapter() {
-                val adapter = CartAdapter(requireContext(), foodNames, foodPrices, foodImageUri, foodDescriptions, quantity, foodIngredients)
+                cartAdapter = CartAdapter(requireContext(), foodNames, foodPrices, foodImageUri, foodDescriptions, quantity, foodIngredients)
                 binding.cartlist.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-                binding.cartlist.adapter = adapter
+                binding.cartlist.adapter = cartAdapter
             }
 
             override fun onCancelled(error: DatabaseError) {

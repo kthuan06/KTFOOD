@@ -1,13 +1,18 @@
 package com.example.ktfood.adapter
 
+import android.content.Context
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.ktfood.databinding.BuyAgainItemBinding
 
-class BuyAgainAdapter (private val bAFoodName: ArrayList<String>,
-                       private val bAPriceName: ArrayList<String>,
-                       private val bAImageName: ArrayList<Int>) : RecyclerView.Adapter<BuyAgainAdapter.BuyAgainViewHolder>() {
+class BuyAgainAdapter (private val bAFoodName: MutableList<String>,
+                       private val bAPriceName: MutableList<String>,
+                       private val bAImageName: MutableList<String>,
+                       private val rcontext: Context
+    ) : RecyclerView.Adapter<BuyAgainAdapter.BuyAgainViewHolder>() {
 
 
     override fun onCreateViewHolder(
@@ -24,11 +29,14 @@ class BuyAgainAdapter (private val bAFoodName: ArrayList<String>,
 
     override fun getItemCount(): Int = bAFoodName.size
 
-    class BuyAgainViewHolder(private val binding : BuyAgainItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(s: String, s1: String, i: Int) {
+    inner class BuyAgainViewHolder(private val binding : BuyAgainItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(s: String, s1: String, i: String) {
             binding.textView12.text = s
             binding.textView13.text = s1
-            binding.imageView4.setImageResource(i)
+            val uriString = i
+            val uri = Uri.parse(uriString)
+            Glide.with(rcontext).load(uri).into(binding.imageView4)
+
         }
 
     }

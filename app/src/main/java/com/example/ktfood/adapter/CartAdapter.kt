@@ -1,12 +1,18 @@
 package com.example.ktfood.adapter
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.example.ktfood.databinding.CartItemBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -64,6 +70,11 @@ class CartAdapter (
     }
 
     override fun getItemCount(): Int = items.size
+    fun getUpdateQuantities(): MutableList<Int> {
+        val itemQuantities  = mutableListOf<Int>()
+        itemQuantities.addAll(cartQuantity)
+        return itemQuantities
+    }
 
     //dung inner class de su dung dc cac bien da khai bao ow tren
     inner class CartViewHolder(private val binding: CartItemBinding): RecyclerView.ViewHolder(binding.root) {
@@ -71,13 +82,16 @@ class CartAdapter (
             binding.apply {
                 val quantity = itemQuantities[position]
                 namecart.text = items[position]
-                pricecart.text = price[position]
+                pricecart.text = "$" + price[position]
 
 
                 val uriString = images[position]
+
                 val uri = Uri.parse(uriString)
 /////////////////////////
                 Glide.with(context).load(uri).into(imageView)
+
+
                 amount.text = quantity.toString()
 
                 minusbutton.setOnClickListener {
@@ -102,12 +116,14 @@ class CartAdapter (
        private fun deceaseQuatity(position: Int){
             if(itemQuantities[position]>1){
                 itemQuantities[position]--
+                cartQuantity[position] =  itemQuantities[position]
                 binding.amount.text = itemQuantities[position].toString()
             }
         }
         private  fun inceaseQuatity(position: Int){
             if(itemQuantities[position]<10){
                 itemQuantities[position]++
+                cartQuantity[position] =  itemQuantities[position]
                 binding.amount.text = itemQuantities[position].toString()
             }
         }
