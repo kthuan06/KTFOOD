@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.fragment.ProfileFragment">
     <LinearLayout
@@ -161,8 +161,20 @@
             android:textStyle="bold"
             android:layout_height="wrap_content"
             android:text="Save" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:background="@drawable/redbutton"
+            android:id="@+id/button8"
+            android:elevation="5dp"
+            android:layout_margin="32dp"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:text="Log out" />
 
     </LinearLayout>
+
 
 
 </FrameLayout>

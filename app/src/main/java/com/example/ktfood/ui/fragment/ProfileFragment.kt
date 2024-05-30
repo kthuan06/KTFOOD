@@ -1,5 +1,6 @@
 package com.example.ktfood.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.ktfood.databinding.FragmentProfileBinding
 import com.example.ktfood.model.UserModel
+import com.example.ktfood.ui.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -55,6 +57,10 @@ class ProfileFragment : Fragment() {
                 editEmail.isEnabled = !editEmail.isEnabled
                 editPhone.isEnabled = !editPhone.isEnabled
             }
+        }
+        binding.button8.setOnClickListener {
+            val intent =Intent(context, LoginActivity::class.java)
+            startActivity(intent)
         }
         return binding.root
 
